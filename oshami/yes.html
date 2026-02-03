@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>She Said YES 💖</title>
+
+    <style>
+      body {
+        margin: 0;
+        font-family: "Segoe UI", sans-serif;
+        background: linear-gradient(135deg, #ffafbd, #ffc3a0);
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .box {
+        background: white;
+        padding: 40px;
+        border-radius: 20px;
+        max-width: 500px;
+        text-align: center;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+      }
+
+      h1 {
+        color: #ff1493;
+      }
+
+      input {
+        width: 100%;
+        padding: 12px;
+        border-radius: 10px;
+        border: 1px solid #ccc;
+        margin-top: 15px;
+        font-size: 1em;
+      }
+
+      button {
+        margin-top: 20px;
+        background: #ff69b4;
+        color: white;
+        border: none;
+        padding: 12px;
+        width: 100%;
+        border-radius: 25px;
+        font-size: 1.1em;
+        cursor: pointer;
+      }
+
+      .time {
+        font-size: 0.85em;
+        margin-top: 15px;
+        opacity: 0.7;
+      }
+    </style>
+
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+    <script>
+      (function () {
+        emailjs.init("5f3_dhNhXzSkMDftd");
+      })();
+    </script>
+  </head>
+
+  <body>
+    <div class="box">
+      <h1>Congratulations My Love 🎉💖</h1>
+
+      <p>
+        You just made me incredibly happy.<br />
+        Please type any acceptance gift of your choice 😌🎁
+      </p>
+
+      <input type="text" id="gift" placeholder="Your acceptance gift idea 💕" />
+
+      <button onclick="finish()">Submit 💖</button>
+
+      <div class="time" id="time"></div>
+    </div>
+
+    <script>
+      /* 🚫 Desktop only */
+      if (window.innerWidth < 1024) {
+        document.body.innerHTML = `
+    <div style="display:flex;justify-content:center;align-items:center;
+    height:100vh;background:black;color:white;text-align:center;">
+      <h2>💻 Please open this on a laptop or desktop ❤️</h2>
+    </div>`;
+      }
+
+      /* Show timestamp */
+      document.getElementById("time").innerText =
+        "She said YES on: " + localStorage.getItem("yesTime");
+
+      /* Exit gracefully */
+      function finish() {
+        const gift = document.getElementById("gift").value;
+        const time = localStorage.getItem("yesTime");
+
+        if (!gift) {
+          alert("Please type something 🥺❤️");
+          return;
+        }
+
+        emailjs
+          .send("service_7nf12zq", "template_nagrvzx", {
+            gift: gift,
+            time: time,
+          })
+          .then(
+            () => {
+              document.body.innerHTML =
+                "<h1 style='margin-top:40vh;text-align:center;'>Thank you my girlfriend 💖🥰</h1>";
+            },
+            () => {
+              alert("Something went wrong 😢");
+            }
+          );
+      }
+    </script>
+  </body>
+</html>

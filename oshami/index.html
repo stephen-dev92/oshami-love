@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Hey Oshami ❤️</title>
+
+    <style>
+      body {
+        margin: 0;
+        font-family: "Segoe UI", sans-serif;
+        background: linear-gradient(135deg, #f8cdda, #1d2b64);
+        color: white;
+        height: 100vh;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .container {
+        background: rgba(0, 0, 0, 0.6);
+        border-radius: 20px;
+        padding: 30px;
+        max-width: 900px;
+        display: flex;
+        gap: 30px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+      }
+
+      img {
+        width: 350px;
+        border-radius: 15px;
+      }
+
+      h1 {
+        color: #ffb6c1;
+        margin-top: 0;
+      }
+
+      .buttons {
+        margin-top: 30px;
+        position: relative;
+        height: 100px;
+      }
+
+      button {
+        padding: 12px 30px;
+        border: none;
+        border-radius: 30px;
+        font-size: 1.1em;
+        cursor: pointer;
+        position: absolute;
+      }
+
+      #yesBtn {
+        background: #ff69b4;
+        color: white;
+        left: 0;
+      }
+
+      #noBtn {
+        background: #555;
+        color: white;
+        left: 150px;
+        transition: transform 0.2s;
+      }
+
+      /* Emoji fall */
+      .emoji {
+        position: fixed;
+        top: -40px;
+        font-size: 24px;
+        animation: fall linear forwards;
+        pointer-events: none;
+        z-index: 9999;
+      }
+
+      @keyframes fall {
+        to {
+          transform: translateY(110vh);
+          opacity: 0;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <img src="IMG_1832.JPG" alt="Us ❤️" />
+
+      <div>
+        <h1>Oshami ❤️</h1>
+        <p>
+          I’ve enjoyed every moment talking to you.<br /><br />
+          The laughs, the late chats, the way you make things feel easy. I don’t
+          want this to just be a “stage” anymore.
+        </p>
+
+        <h2>Will you be my girlfriend? 💖</h2>
+
+        <div class="buttons">
+          <button id="yesBtn" onclick="sayYes()">Yes 💕</button>
+          <button id="noBtn">No 😅</button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      /* 🚫 Desktop only */
+      if (window.innerWidth < 1024) {
+        document.body.innerHTML = `
+    <div style="display:flex;justify-content:center;align-items:center;
+    height:100vh;background:black;color:white;text-align:center;">
+      <h2>💻 Please open this on a laptop or desktop ❤️</h2>
+    </div>`;
+      }
+
+      /* Emoji rain */
+      const emojis = ["❤️", "🌸", "💐", "🌹", "💖"];
+      setInterval(() => {
+        const e = document.createElement("div");
+        e.className = "emoji";
+        e.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+        e.style.left = Math.random() * 100 + "vw";
+        e.style.animationDuration = 3 + Math.random() * 3 + "s";
+        document.body.appendChild(e);
+        setTimeout(() => e.remove(), 6000);
+      }, 400);
+
+      /* Dancing NO button */
+      const noBtn = document.getElementById("noBtn");
+      noBtn.addEventListener("mouseover", () => {
+        const x = Math.random() * 300;
+        const y = Math.random() * 80;
+        noBtn.style.transform = `translate(${x}px, ${y}px)`;
+      });
+
+      /* Confetti + timestamp */
+      function sayYes() {
+        const time = new Date().toLocaleString();
+        localStorage.setItem("yesTime", time);
+        launchConfetti();
+        setTimeout(() => (window.location.href = "yes.html"), 1200);
+      }
+
+      function launchConfetti() {
+        for (let i = 0; i < 120; i++) {
+          const c = document.createElement("div");
+          c.className = "emoji";
+          c.innerText = "🎉";
+          c.style.left = Math.random() * 100 + "vw";
+          c.style.animationDuration = 2 + Math.random() * 2 + "s";
+          document.body.appendChild(c);
+          setTimeout(() => c.remove(), 4000);
+        }
+      }
+    </script>
+  </body>
+</html>
